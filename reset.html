@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocol Reset | Secure Access</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="glow-bg"></div>
+    
+    <main class="hero-container">
+        <div class="glass-card">
+            <div class="badge">SECURE PROTOCOL</div>
+            
+            <header>
+                <h1>Réinitialisation <span>Master Key</span></h1>
+                <p>Identité confirmée. Veuillez redéfinir vos accès cryptographiques.</p>
+            </header>
+
+            <form id="resetForm">
+                <div class="input-field">
+                    <input type="password" id="new-password" required placeholder=".">
+                    <label>Nouveau Code d'Accès</label>
+                    <div class="line"></div>
+                </div>
+
+                <div class="input-field">
+                    <input type="password" id="confirm-password" required placeholder=".">
+                    <label>Confirmation du Code</label>
+                    <div class="line"></div>
+                </div>
+
+                <div id="error-message" class="error-msg"></div>
+
+                <button type="submit" class="btn-hyper">
+                    <span class="text">ACTIVER LE CODE</span>
+                    <span class="shimmer"></span>
+                </button>
+            </form>
+
+            <footer class="terminal-footer">
+                <a href="#">Annuler l'opération</a>
+            </footer>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
