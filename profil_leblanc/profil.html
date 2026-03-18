@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil</title>
+    <style>
+        /* Réinitialisation et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Conteneur principal */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        /* En-tête du profil */
+        .profile-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .profile-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        /* Section photo de profil */
+        .photo-section {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .photo-upload-btn {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .photo-upload-btn:hover {
+            background: #f0f0f0;
+        }
+
+        /* Contenu principal */
+        .profile-content {
+            padding: 40px;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Formulaire */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #555;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group input:disabled {
+            background: #f5f5f5;
+            cursor: not-allowed;
+        }
+
+        /* Grille pour les champs */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Boutons */
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* Paramètres */
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .settings-item label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        /* Toggle switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #667eea;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Message de succès */
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-content {
+                padding: 20px;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête du profil -->
+        <div class="profile-header">
+            <h1>Mon Profil</h1>
+            <p>Gérez vos informations personnelles</p>
+        </div>
+
+        <div class="profile-content">
+            <!-- Message de succès -->
+            <div id="successMessage" class="success-message">
+                Modifications enregistrées avec succès !
+            </div>
+
+            <!-- Section Photo de profil -->
+            <div class="section">
+                <div class="section-title">
+                    <h2>Photo de profil</h2>
+                </div>
+                <div style="text-align: center;">
+                    <div class="photo-section">
+                        <img id="profilePhoto" src="https://via.placeholder.com/150" alt="Photo de profil" class="profile-photo">
+                        <button class="photo-upload-btn" onclick="document.getElementById('photoInput').click()">📷</button>
+                        <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="changePhoto(event)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section Informations personnelles -->
+            <div class="section">
+                <div class="section-title">
+                    <h2>Informations personnelles</h2>
+                    <button class="btn btn-primary" id="editBtn" onclick="toggleEdit()">Modifier</button>
+                </div>
+                
+                <form id="profileForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nom">Nom</label>
+                            <input type="text" id="nom" value="Dupont" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom">Prénom</label>
+                            <input type="text" id="prenom" value="Jean" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dateNaissance">Date de naissance</label>
+                        <input type="date" id="dateNaissance" value="1990-01-15" disabled>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ville">Ville</label>
+                            <input type="text" id="ville" value="Paris" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="pays">Pays</label>
+                            <input type="text" id="pays" value="France" disabled>
+                        </div>
+                    </div>
+
+                    <div class="btn-group" id="actionButtons" style="display: none;">
+                        <button type="button" class="btn btn-primary" onclick="saveProfile()">Enregistrer</button>
+                        <button type="button" class="btn btn-secondary" onclick="cancelEdit()">Annuler</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Section Paramètres -->
+            <div class="section">
+                <div class="section-title">
+                    <h2>Paramètres</h2>
+                </div>
+
+                <div class="settings-item">
+                    <label>Notifications par email</label>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="settings-item">
+                    <label>Profil public</label>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="settings-item">
+                    <label>Authentification à deux facteurs</label>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Section Sécurité -->
+            <div class="section">
+                <div class="section-title">
+                    <h2>Modifier le mot de passe</h2>
+                </div>
+
+                <form id="passwordForm">
+                    <div class="form-group">
+                        <label for="currentPassword">Mot de passe actuel</label>
+                        <input type="password" id="currentPassword" placeholder="Entrez votre mot de passe actuel">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newPassword">Nouveau mot de passe</label>
+                        <input type="password" id="newPassword" placeholder="Entrez un nouveau mot de passe">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmer le mot de passe</label>
+                        <input type="password" id="confirmPassword" placeholder="Confirmez le nouveau mot de passe">
+                    </div>
+
+                    <button type="button" class="btn btn-danger" onclick="changePassword()">Changer le mot de passe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables pour stocker les valeurs originales
+        let originalValues = {};
+
+        // Fonction pour activer le mode édition
+        function toggleEdit() {
+            const inputs = document.querySelectorAll('#profileForm input');
+            const editBtn = document.getElementById('editBtn');
+            const actionButtons = document.getElementById('actionButtons');
+
+            // Sauvegarder les valeurs originales
+            originalValues = {
+                nom: document.getElementById('nom').value,
+                prenom: document.getElementById('prenom').value,
+                dateNaissance: document.getElementById('dateNaissance').value,
+                ville: document.getElementById('ville').value,
+                pays: document.getElementById('pays').value
+            };
+
+            // Activer les champs
+            inputs.forEach(input => input.disabled = false);
+            editBtn.style.display = 'none';
+            actionButtons.style.display = 'flex';
+        }
+
+        // Fonction pour annuler les modifications
+        function cancelEdit() {
+            const editBtn = document.getElementById('editBtn');
+            const actionButtons = document.getElementById('actionButtons');
+
+            // Restaurer les valeurs originales
+            document.getElementById('nom').value = originalValues.nom;
+            document.getElementById('prenom').value = originalValues.prenom;
+            document.getElementById('dateNaissance').value = originalValues.dateNaissance;
+            document.getElementById('ville').value = originalValues.ville;
+            document.getElementById('pays').value = originalValues.pays;
+
+            // Désactiver les champs
+            const inputs = document.querySelectorAll('#profileForm input');
+            inputs.forEach(input => input.disabled = true);
+            
+            editBtn.style.display = 'block';
+            actionButtons.style.display = 'none';
+        }
+
+        // Fonction pour sauvegarder le profil
+        function saveProfile() {
+            const editBtn = document.getElementById('editBtn');
+            const actionButtons = document.getElementById('actionButtons');
+            const successMessage = document.getElementById('successMessage');
+
+            // Désactiver les champs
+            const inputs = document.querySelectorAll('#profileForm input');
+            inputs.forEach(input => input.disabled = true);
+
+            // Afficher le message de succès
+            successMessage.classList.add('show');
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 3000);
+
+            editBtn.style.display = 'block';
+            actionButtons.style.display = 'none';
+
+            // Ici, vous pouvez ajouter du code pour envoyer les données au serveur
+            console.log('Profil sauvegardé:', {
+                nom: document.getElementById('nom').value,
+                prenom: document.getElementById('prenom').value,
+                dateNaissance: document.getElementById('dateNaissance').value,
+                ville: document.getElementById('ville').value,
+                pays: document.getElementById('pays').value
+            });
+        }
+
+        // Fonction pour changer la photo de profil
+        function changePhoto(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profilePhoto').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Fonction pour changer le mot de passe
+        function changePassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validation
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                alert('Veuillez remplir tous les champs');
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                alert('Les mots de passe ne correspondent pas');
+                return;
+            }
+
+            if (newPassword.length < 6) {
+                alert('Le mot de passe doit contenir au moins 6 caractères');
+                return;
+            }
+
+            // Afficher le message de succès
+            const successMessage = document.getElementById('successMessage');
+            successMessage.textContent = 'Mot de passe modifié avec succès !';
+            successMessage.classList.add('show');
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+                successMessage.textContent = 'Modifications enregistrées avec succès !';
+            }, 3000);
+
+            // Réinitialiser le formulaire
+            document.getElementById('passwordForm').reset();
+
+            // Ici, vous pouvez ajouter du code pour envoyer les données au serveur
+            console.log('Mot de passe changé');
+        }
+    </script>
+</body>
+</html>
