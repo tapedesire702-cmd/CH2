@@ -1,0 +1,1 @@
+resetDocument = querySelectorAll(reset.html)

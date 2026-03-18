@@ -108,8 +108,84 @@ h2 {
     position: relative;
 }
 
+<<<<<<< HEAD
+.btn-secondary{
+background:#1e293b;
+color:white;
+}
+
+.btn-outline{
+border:2px solid #38bdf8;
+background:transparent;
+color:#38bdf8;
+}
+
+.btn-reset {
+    border:2px solid #38bdf8;
+    background:transparent;
+    color:#38bdf8;
+    transform: translateY(0);
+    transition: transform 0.5s ease
+}
+
+.btn-reset:hover {
+    transform: translateY(-20px);
+}
+
+/* Services */
+
+.services{
+padding:80px 40px;
+text-align:center;
+background:#111827;
+}
+
+.services h2{
+margin-bottom:40px;
+font-size:30px;
+}
+
+.cards{
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+}
+
+.card{
+background:#1f2937;
+padding:30px;
+width:250px;
+border-radius:10px;
+}
+
+.card h3{
+color:#38bdf8;
+margin-bottom:10px;
+}
+
+.card button{
+margin-top:15px;
+background:#38bdf8;
+color:white;
+}
+
+/* Footer */
+
+footer{
+text-align:center;
+padding:40px;
+background:#020617;
+}
+
+.btn-footer{
+margin-top:20px;
+background:#38bdf8;
+color:white;
+=======
 .glitch-btn:hover {
     background: var(--neon-purple);
     box-shadow: 0 0 20px var(--neon-purple);
     text-shadow: 0 0 5px white;
+>>>>>>> main
 }
