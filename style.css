@@ -89,6 +89,18 @@ background:transparent;
 color:#38bdf8;
 }
 
+.btn-reset {
+    border:2px solid #38bdf8;
+    background:transparent;
+    color:#38bdf8;
+    transform: translateY(0);
+    transition: transform 0.5s ease
+}
+
+.btn-reset:hover {
+    transform: translateY(-20px);
+}
+
 /* Services */
 
 .services{
