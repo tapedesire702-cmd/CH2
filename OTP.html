@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Vérification du code</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    background:white;
+    padding:40px;
+    border-radius:10px;
+    text-align:center;
+    width:350px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h2{
+    margin-bottom:10px;
+}
+
+.code-inputs{
+    display:flex;
+    justify-content:space-between;
+    margin:25px 0;
+}
+
+.code-inputs input{
+    width:45px;
+    height:50px;
+    font-size:22px;
+    text-align:center;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    background:#007BFF;
+    color:white;
+    font-size:16px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Vérification</h2>
+
+<p>Entrez le code de 6 chiffres envoyé à votre email</p>
+
+<div class="code-inputs">
+
+<input type="text" maxlength="1">
+<input type="text" maxlength="1">
+<input type="text" maxlength="1">
+<input type="text" maxlength="1">
+<input type="text" maxlength="1">
+<input type="text" maxlength="1">
+
+</div>
+
+<button onclick="verifierCode()">Vérifier</button>
+
+</div>
+
+<script>
+
+const inputs = document.querySelectorAll(".code-inputs input");
+
+inputs.forEach((input, index) => {
+
+input.addEventListener("input", () => {
+
+if(input.value.length === 1 && index < inputs.length - 1){
+inputs[index + 1].focus();
+}
+
+});
+
+});
+
+function verifierCode(){
+
+let code = "";
+
+inputs.forEach(input => {
+code += input.value;
+});
+
+alert("Code entré : " + code);
+
+// ici tu peux envoyer le code au serveur
+
+}
+
+</script>
+
+</body>
+</html>
